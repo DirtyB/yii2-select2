@@ -1,6 +1,8 @@
 Select2 widget for Yii2 framework
 =================
 
+Forked from [Select2 widget for Yii2 framework by Andrey Borodulin](https://github.com/borodulin/yii2-select2)
+
 ## Description
 
 Select2 gives you a customizable select box with support for searching, tagging, remote data sets, infinite scrolling, and many other highly used options.

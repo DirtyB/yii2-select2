@@ -7,6 +7,7 @@
 
 namespace conquer\select2;
 
+use Yii;
 use yii\helpers\Html;
 use conquer\helpers\Json;
 use yii\helpers\Url;
@@ -119,10 +120,15 @@ class Select2Widget extends \yii\widgets\InputWidget
     public function registerAssets()
     {
         $view = $this->getView();
-        
+
         Select2Asset::register($view);
         if ($this->bootstrap)
             Select2BootstrapAsset::register($view);
+
+        if(isset($this->settings['language'])){
+            $asset = Yii::$app->assetManager->bundles[Select2Asset::className()];
+            $asset->js[] = 'js/i18n/'.$this->settings['language'].'.js';
+        }
         
         $id = $this->options['id'];
        

@@ -45,7 +45,7 @@ class Select2Widget extends \yii\widgets\InputWidget
      * @see \yii\helpers\BaseArrayHelper::map()
      * @var array
      */
-    public $items = [];
+    public $items;
     /**
      * A placeholder value can be defined and will be displayed until a selection is made
      * @var string
@@ -73,7 +73,7 @@ class Select2Widget extends \yii\widgets\InputWidget
     public function init()
     {
         parent::init();
-        
+
         if (isset($this->tags)) {
             $this->options['data-tags'] = $this->tags;
             $this->options['multiple'] = true;
@@ -107,10 +107,21 @@ class Select2Widget extends \yii\widgets\InputWidget
     public function run()
     {
         if ($this->hasModel()) {
-            echo Html::activeDropDownList($this->model, $this->attribute, $this->items, $this->options);
+            if(isset($this->items)) {
+                $input = Html::activeDropDownList($this->model, $this->attribute, $this->items, $this->options);
+            }
+            else {
+                $input = Html::activeTextInput($this->model, $this->attribute, $this->options);
+            }
         } else {
-            echo Html::dropDownList($this->name, $this->value, $this->items, $this->options);
+            if(isset($this->items)) {
+                $input = Html::dropDownList($this->name, $this->value, $this->items, $this->options);
+            }
+            else {
+                $input = Html::textInput($this->name, $this->value, $this->options);
+            }
         }
+        echo $input;
         $this->registerAssets();
     }
     
